@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2026.01.09 学マス お仕事トラベル</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
+
+      body {
+        font-family: "Noto Sans JP", "Noto Sans KR", sans-serif;
+        background-color: #f3f4f6;
+      }
+
+      .timeline-line {
+        position: absolute;
+        left: 22px;
+        top: 4px;
+        bottom: 0;
+        width: 4px;
+        background: #e5e7eb;
+        z-index: 0;
+        margin-bottom: 156px;
+      }
+
+      .active-line {
+        background: linear-gradient(to bottom, #f97316, #ec4899, #3b82f6);
+      }
+
+      .card-shadow {
+        box-shadow: 0 4px 6px 2px rgba(0, 0, 0, 0.1),
+          0 2px 4px 2px rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s;
+      }
+
+      .card-shadow:active {
+        transform: scale(0.98);
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body class="text-gray-800">
+    <div
+      class="max-w-md mx-auto bg-white min-h-screen relative shadow-2xl overflow-hidden flex flex-col"
+    >
+      <!-- Header -->
+      <header
+        class="bg-gradient-to-r from-orange-400 via-pink-500 to-blue-500 text-white p-6 rounded-b-3xl relative z-10 shrink-0"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-xs font-bold bg-white/20 px-2 py-1 rounded-full"
+            >2026.01.09 (<span data-i18n="dayFri">金</span>)</span
+          >
+          <button
+            onclick="toggleLang()"
+            id="lang-btn"
+            class="text-xs font-bold bg-white/20 px-3 py-1 rounded-full hover:bg-white/30 transition"
+          >
+            <i class="fas fa-globe mr-1"></i><span id="lang-label">KO</span>
+          </button>
+        </div>
+        <h1 class="text-2xl font-bold leading-tight" data-i18n="headerTitle">
+          学園アイドルマスター<br />プロデューサーお仕事トラベル
+        </h1>
+        <p class="text-sm text-white/90 mt-2 opacity-90" data-i18n="headerSub">
+          渋谷 POP UP → 池袋水族館
+        </p>
+      </header>
+
+      <!-- Tab Navigation -->
+      <div class="flex justify-center mt-4 px-4 gap-2 shrink-0">
+        <button
+          onclick="switchTab('timeline')"
+          id="btn-timeline"
+          class="flex-1 py-2 rounded-xl text-sm font-bold bg-gray-800 text-white shadow-lg transition-all"
+        >
+          <i class="fas fa-route mr-1"></i>
+          <span data-i18n="tabTimeline">タイムライン</span>
+        </button>
+      </div>
+
+      <!-- Content Area -->
+      <div id="content-area" class="pb-24 pt-4 px-4 overflow-y-auto flex-1">
+        <div id="view-timeline" class="block relative pl-2">
+          <div class="timeline-line active-line"></div>
+
+          <!-- 10:30 Meeting -->
+          <div class="relative flex items-start mb-8 group">
+            <div
+              class="absolute left-0 mt-1 w-8 h-8 rounded-full bg-orange-500 border-4 border-white shadow-md z-10 flex items-center justify-center text-white text-xs"
+            >
+              <i class="fas fa-hand-sparkles"></i>
+            </div>
+            <div class="ml-12 w-full">
+              <span
+                class="text-xs font-bold text-orange-500 bg-orange-50 px-2 py-0.5 rounded"
+                >10:30 AM</span
+              >
+              <div class="bg-white p-4 rounded-2xl card-shadow mt-2">
+                <h3 class="font-bold text-lg" data-i18n="spot1Title">
+                  渋谷駅で待ち合わせ
+                </h3>
+                <p class="text-sm text-gray-600 mt-1" data-i18n="spot1Desc">
+                  ハチ公像前で集合
+                </p>
+                <div class="mt-3 rounded-xl overflow-hidden">
+                  <img
+                    src="img/dog.png"
+                    alt="ハチ公像"
+                    class="w-full h-32 object-cover rounded-xl"
+                  />
+                </div>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded"
+                    ><i class="fas fa-train mr-1"></i
+                    ><span data-i18n="spot1Tag1">JR渋谷駅</span></span
+                  >
+                  <span
+                    class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+                    data-i18n="spot1Tag2"
+                    >ハチ公口</span
+                  >
+                </div>
+              </div>
+              <div class="flex items-center mt-2 text-xs text-gray-400 pl-1">
+                <i class="fas fa-walking mr-1"></i>
+                <span data-i18n="walk1">徒歩1分（TSUTAYA方面）</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10:45 TSUTAYA -->
+          <div class="relative flex items-start mb-8 group">
+            <div
+              class="absolute left-0 mt-1 w-8 h-8 rounded-full bg-orange-400 border-4 border-white shadow-md z-10 flex items-center justify-center text-white text-xs"
+            >
+              <i class="fas fa-music"></i>
+            </div>
+            <div class="ml-12 w-full">
+              <span
+                class="text-xs font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded"
+                >10:45 AM</span
+              >
+              <div class="bg-white p-4 rounded-2xl card-shadow mt-2">
+                <h3 class="font-bold text-lg">SHIBUYA TSUTAYA</h3>
+                <p class="text-sm text-gray-600 mt-1" data-i18n="spot2Desc">
+                  Wild TUNE ポップアップ
+                </p>
+                <div class="mt-3 rounded-xl overflow-hidden">
+                  <img
+                    src="img/g4.jpg"
+                    alt="Wild TUNE x TSUTAYA"
+                    class="w-full h-auto rounded-xl"
+                  />
+                </div>
+                <div class="mt-3 bg-gray-50 p-3 rounded-xl">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-orange-600"
+                      >Wild TUNE × TSUTAYA</span
+                    >
+                    <span
+                      class="text-[10px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full"
+                      >2026.1.6~1.29</span
+                    >
+                  </div>
+                  <div class="space-y-1 text-xs text-gray-600">
+                    <p>
+                      <i class="fas fa-map-marker-alt text-orange-400 mr-1"></i
+                      ><span data-i18n="spot2Loc"
+                        >東京：SHIBUYA TSUTAYA IP書店</span
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+                    data-i18n="spot2Tag1"
+                    >スカジャン</span
+                  >
+                  <span
+                    class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+                    data-i18n="spot2Tag2"
+                    >ストリート</span
+                  >
+                  <span
+                    class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+                    data-i18n="spot2Tag3"
+                    >限定グッズ</span
+                  >
+                </div>
+              </div>
+              <div class="flex items-center mt-2 text-xs text-gray-400 pl-1">
+                <i class="fas fa-walking mr-1"></i>
+                <span data-i18n="walk2">徒歩3分（スクランブル交差点）</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11:30 Magnet -->
+          <div class="relative flex items-start mb-8">
+            <div
+              class="absolute left-0 mt-1 w-8 h-8 rounded-full bg-orange-400 border-4 border-white shadow-md z-10 flex items-center justify-center text-white text-xs"
+            >
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+            <div class="ml-12 w-full">
+              <span
+                class="text-xs font-bold text-orange-400 bg-orange-50 px-2 py-0.5 rounded"
+                >11:30 AM</span
+              >
+              <div class="bg-white p-4 rounded-2xl card-shadow mt-2">
+                <h3 class="font-bold text-lg">MAGNET by SHIBUYA109</h3>
+                <p class="text-sm text-gray-600 mt-1" data-i18n="spot3Desc">
+                  お仕事体験フェア POP UP
+                </p>
+                <div class="mt-3 rounded-xl overflow-hidden">
+                  <img
+                    src="img/g1.jpg"
+                    alt="お仕事体験フェア"
+                    class="w-full h-auto rounded-xl"
+                  />
+                </div>
+                <div class="mt-3 bg-orange-50 p-3 rounded-xl">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-orange-600"
+                      >お仕事体験フェア</span
+                    >
+                    <span
+                      class="text-[10px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full"
+                      >2025.12.19~2026.1.12</span
+                    >
+                  </div>
+                  <div class="space-y-1 text-xs text-gray-600">
+                    <p>
+                      <i class="fas fa-building text-orange-400 mr-1"></i>MAGNET
+                      by SHIBUYA109 5F
+                    </p>
+                    <p>
+                      <i class="fas fa-store text-orange-400 mr-1"></i>JOL
+                      Collab Store
+                    </p>
+                    <p>
+                      <i class="fas fa-clock text-orange-400 mr-1"></i
+                      >10:00~21:00
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-pink-100 text-pink-600 px-2 py-1 rounded"
+                    ><i class="fas fa-camera mr-1"></i
+                    ><span data-i18n="spot3Tag1">フォトスポット</span></span
+                  >
+                  <span
+                    class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+                    data-i18n="spot3Tag2"
+                    >12人職業テーマ</span
+                  >
+                  <span
+                    class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+                    data-i18n="spot3Tag3"
+                    >限定グッズ</span
+                  >
+                </div>
+              </div>
+              <div class="flex items-center mt-2 text-xs text-gray-400 pl-1">
+                <i class="fas fa-walking mr-1"></i>
+                <span data-i18n="walk3">徒歩5分（MODI方面）</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13:00 Cafe -->
+          <div class="relative flex items-start mb-10">
+            <div
+              class="absolute left-0 mt-1 w-8 h-8 rounded-full bg-pink-500 border-4 border-white shadow-md z-10 flex items-center justify-center text-white text-xs"
+            >
+              <i class="fas fa-coffee"></i>
+            </div>
+            <div class="ml-12 w-full">
+              <span
+                class="text-xs font-bold text-pink-500 bg-pink-50 px-2 py-0.5 rounded"
+                >01:00 PM</span
+              >
+              <div class="bg-white p-4 rounded-2xl card-shadow mt-2">
+                <div class="flex justify-between items-start">
+                  <h3 class="font-bold text-lg">Chugai Grace Café</h3>
+                  <span
+                    class="bg-red-100 text-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded"
+                    data-i18n="reserveReq"
+                    >要予約</span
+                  >
+                </div>
+                <p class="text-sm text-gray-600 mt-1" data-i18n="spot4Desc">
+                  コラボカフェ初日訪問
+                </p>
+                <div class="mt-3 rounded-xl overflow-hidden">
+                  <img
+                    src="img/g2.jpg"
+                    alt="Chugai Grace Café"
+                    class="w-full h-auto rounded-xl"
+                  />
+                </div>
+                <div class="mt-3 bg-pink-50 p-3 rounded-xl">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-pink-600"
+                      >Chugai Grace Café</span
+                    >
+                    <span
+                      class="text-[10px] bg-pink-100 text-pink-600 px-2 py-0.5 rounded-full"
+                      >2026.1.9~2.8</span
+                    >
+                  </div>
+                  <div class="space-y-1 text-xs text-gray-600">
+                    <p>
+                      <i class="fas fa-map-marker-alt text-pink-400 mr-1"></i
+                      >渋谷MODI 7F (神南1-21-3)
+                    </p>
+                    <p>
+                      <i class="fas fa-clock text-pink-400 mr-1"></i>11:10~19:50
+                      (<span data-i18n="cafeTime">80分制、5回転</span>)
+                    </p>
+                    <p>
+                      <i class="fas fa-yen-sign text-pink-400 mr-1"></i
+                      ><span data-i18n="cafeFee"
+                        >入場料500円（飲食代として利用可）</span
+                      >
+                    </p>
+                  </div>
+                  <div class="mt-2 space-y-1">
+                    <div class="p-2 bg-red-50 rounded-lg border border-red-200">
+                      <p class="text-[10px] text-red-600 font-bold">
+                        <i class="fas fa-calendar-check mr-1"></i
+                        ><span data-i18n="cafeRes"
+                          >抽選予約：12/6(土)~12/12(金)</span
+                        >
+                      </p>
+                      <p
+                        class="text-[10px] text-gray-500"
+                        data-i18n="cafeFirst"
+                      >
+                        先着順：12/16(火) 17:00~
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-pink-100 text-pink-600 px-2 py-1 rounded"
+                    data-i18n="spot4Tag1"
+                    >コラボメニュー</span
+                  >
+                  <span
+                    class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+                    data-i18n="spot4Tag2"
+                    >限定グッズ</span
+                  >
+                  <span
+                    class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded"
+                    data-i18n="spot4Tag3"
+                    >ノベルティ特典</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transit -->
+          <div class="relative flex items-center justify-center mb-10">
+            <div
+              class="bg-gray-800 text-white text-xs py-2 px-6 rounded-full shadow-lg z-10 flex items-center"
+            >
+              <i class="fas fa-subway mr-2"></i>
+              <span data-i18n="transit">渋谷駅 → 池袋駅（約20分）</span>
+            </div>
+          </div>
+
+          <!-- 15:30 Sunshine -->
+          <div class="relative flex items-start mb-8">
+            <div
+              class="absolute left-0 mt-1 w-8 h-8 rounded-full bg-blue-400 border-4 border-white shadow-md z-10 flex items-center justify-center text-white text-xs"
+            >
+              <i class="fas fa-building"></i>
+            </div>
+            <div class="ml-12 w-full">
+              <span
+                class="text-xs font-bold text-blue-400 bg-blue-50 px-2 py-0.5 rounded"
+                >03:30 PM</span
+              >
+              <div class="bg-white p-4 rounded-2xl card-shadow mt-2">
+                <h3 class="font-bold text-lg" data-i18n="spot5Title">
+                  サンシャインシティ到着
+                </h3>
+                <p class="text-sm text-gray-600 mt-1" data-i18n="spot5Desc">
+                  ウィンドウショッピング＆休憩
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 16:30 Aquarium -->
+          <div class="relative flex items-start mb-8">
+            <div
+              class="absolute left-0 mt-1 w-8 h-8 rounded-full bg-blue-600 border-4 border-white shadow-md z-10 flex items-center justify-center text-white text-xs"
+            >
+              <i class="fas fa-fish"></i>
+            </div>
+            <div class="ml-12 w-full">
+              <span
+                class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded"
+                >04:30 PM</span
+              >
+              <div class="bg-white p-4 rounded-2xl card-shadow mt-2">
+                <h3 class="font-bold text-lg" data-i18n="spot6Title">
+                  初星水族館 II
+                </h3>
+                <p class="text-sm text-gray-600 mt-1" data-i18n="spot6Desc">
+                  サンシャイン水族館（屋上）
+                </p>
+                <div class="mt-3 rounded-xl overflow-hidden">
+                  <img
+                    src="img/g3.jpg"
+                    alt="初星水族館 II"
+                    class="w-full h-auto rounded-xl"
+                  />
+                </div>
+                <div class="mt-3 bg-blue-50 p-3 rounded-xl">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-blue-600"
+                      >初星水族館 Ⅱ</span
+                    >
+                    <span
+                      class="text-[10px] bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full"
+                      >2025.12.19~2026.1.18</span
+                    >
+                  </div>
+                  <div class="space-y-1 text-xs text-gray-600">
+                    <p>
+                      <i class="fas fa-map-marker-alt text-blue-400 mr-1"></i
+                      >サンシャイン水族館 (東池袋3-1 屋上)
+                    </p>
+                    <p>
+                      <i class="fas fa-clock text-blue-400 mr-1"></i
+                      ><span data-i18n="aquaTime"
+                        >特設会場 10:00~18:00（入場17:30まで）</span
+                      >
+                    </p>
+                    <p>
+                      <i class="fas fa-ticket-alt text-blue-400 mr-1"></i
+                      ><span data-i18n="aquaFee"
+                        >特設会場無料 / 本館別途入場料</span
+                      >
+                    </p>
+                  </div>
+                  <div class="mt-2 space-y-1">
+                    <div
+                      class="p-2 bg-cyan-50 rounded-lg border border-cyan-200"
+                    >
+                      <p class="text-[10px] text-cyan-700">
+                        <i class="fas fa-star mr-1"></i
+                        ><span data-i18n="aquaInfo1"
+                          >クリオネ衣装13人等身大パネル＆3Dホログラム</span
+                        >
+                      </p>
+                      <p class="text-[10px] text-cyan-600 mt-1">
+                        <i class="fas fa-map-signs mr-1"></i
+                        ><span data-i18n="aquaInfo2"
+                          >デジタルスタンプラリー（12箇所→ミニキャラカード）</span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="mt-2 p-2 bg-green-50 rounded-lg border border-green-200"
+                  >
+                    <p class="text-[10px] text-green-700">
+                      <i class="fas fa-ticket-alt mr-1"></i
+                      ><span data-i18n="aquaTicket"
+                        >特典チケット（アソビュー!）：大人3,600~4,000円</span
+                      >
+                    </p>
+                    <p class="text-[10px] text-gray-500" data-i18n="aquaClosed">
+                      ※ 1/15(木)休館
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 18:00 Dinner -->
+          <div class="relative flex items-start mb-8">
+            <div
+              class="absolute left-0 mt-1 w-8 h-8 rounded-full bg-indigo-600 border-4 border-white shadow-md z-10 flex items-center justify-center text-white text-xs"
+            >
+              <i class="fas fa-utensils"></i>
+            </div>
+            <div class="ml-12 w-full">
+              <span
+                class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded"
+                >06:00 PM</span
+              >
+              <div class="bg-white p-4 rounded-2xl card-shadow mt-2">
+                <h3 class="font-bold text-lg" data-i18n="spot7Title">夕食</h3>
+                <p class="text-sm text-gray-600 mt-1" data-i18n="spot7Desc">
+                  サンシャインシティ レストラン街
+                </p>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <span
+                    class="text-xs bg-indigo-100 text-indigo-600 px-2 py-1 rounded"
+                    ><i class="fas fa-bowl-rice mr-1"></i
+                    ><span data-i18n="food1">和食</span></span
+                  >
+                  <span
+                    class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+                    data-i18n="food2"
+                    >洋食</span
+                  >
+                  <span
+                    class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded"
+                    data-i18n="food3"
+                    >カフェ</span
+                  >
+                </div>
+              </div>
+              <div class="flex items-center mt-2 text-xs text-gray-400 pl-1">
+                <i class="fas fa-clock mr-1"></i>
+                <span data-i18n="mealTime">ゆっくり食事（~1時間）</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 19:00~20:00 Wrap-up -->
+          <div class="relative flex items-start">
+            <div
+              class="absolute left-0 mt-1 w-8 h-8 rounded-full bg-indigo-800 border-4 border-white shadow-md z-10 flex items-center justify-center text-white text-xs"
+            >
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="ml-12 w-full">
+              <span
+                class="text-xs font-bold text-indigo-800 bg-indigo-50 px-2 py-0.5 rounded"
+                >07:00~08:00 PM</span
+              >
+              <div class="bg-white p-4 rounded-2xl card-shadow mt-2">
+                <h3 class="font-bold text-lg" data-i18n="spot8Title">
+                  終了＆帰宅
+                </h3>
+                <p class="text-sm text-gray-600 mt-1" data-i18n="spot8Desc">
+                  お疲れ様でした！
+                </p>
+                <div class="mt-3 bg-gray-50 p-3 rounded-xl">
+                  <div class="space-y-1 text-xs text-gray-600">
+                    <p>
+                      <i class="fas fa-shopping-bag text-indigo-400 mr-1"></i
+                      ><span data-i18n="wrapup1">グッズ整理＆破損確認</span>
+                    </p>
+                    <p>
+                      <i class="fas fa-train text-green-500 mr-1"></i
+                      ><span data-i18n="wrapup2">池袋駅から帰宅</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Action Button -->
+      <button
+        onclick="toggleChecklist()"
+        class="fixed bottom-6 right-6 w-14 h-14 bg-gray-900 rounded-full shadow-2xl flex items-center justify-center text-white z-50 hover:scale-105 transition active:scale-95 group"
+      >
+        <i
+          class="fas fa-clipboard-list text-xl group-hover:rotate-12 transition-transform"
+        ></i>
+      </button>
+
+      <!-- Checklist Modal -->
+      <div
+        id="checklist-modal"
+        class="fixed inset-0 bg-black/50 z-40 hidden flex items-center justify-center p-4 backdrop-blur-sm"
+      >
+        <div class="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-lg" data-i18n="checklistTitle">
+              チェックリスト
+            </h3>
+            <button
+              onclick="toggleChecklist()"
+              class="text-gray-400 hover:text-gray-600"
+            >
+              <i class="fas fa-times text-xl"></i>
+            </button>
+          </div>
+          <ul class="space-y-3">
+            <li
+              class="flex items-center p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"
+              onclick="toggleCheckbox(this)"
+            >
+              <div
+                class="w-5 h-5 border-2 border-pink-500 rounded flex items-center justify-center text-white transition-colors"
+              ></div>
+              <label
+                class="ml-3 text-sm font-medium text-gray-700 cursor-pointer select-none"
+                data-i18n="check1"
+                >コラボカフェ抽選予約 (12/6~12)</label
+              >
+            </li>
+            <li
+              class="flex items-center p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"
+              onclick="toggleCheckbox(this)"
+            >
+              <div
+                class="w-5 h-5 border-2 border-blue-500 rounded flex items-center justify-center text-white transition-colors"
+              ></div>
+              <label
+                class="ml-3 text-sm font-medium text-gray-700 cursor-pointer select-none"
+                data-i18n="check2"
+                >水族館特典チケット（アソビュー!）</label
+              >
+            </li>
+            <li
+              class="flex items-center p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"
+              onclick="toggleCheckbox(this)"
+            >
+              <div
+                class="w-5 h-5 border-2 border-orange-500 rounded flex items-center justify-center text-white transition-colors"
+              ></div>
+              <label
+                class="ml-3 text-sm font-medium text-gray-700 cursor-pointer select-none"
+                data-i18n="check3"
+                >MAGNET整理券（混雑時）</label
+              >
+            </li>
+            <li
+              class="flex items-center p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"
+              onclick="toggleCheckbox(this)"
+            >
+              <div
+                class="w-5 h-5 border-2 border-yellow-500 rounded flex items-center justify-center text-white transition-colors"
+              ></div>
+              <label
+                class="ml-3 text-sm font-medium text-gray-700 cursor-pointer select-none"
+                data-i18n="check4"
+                >大きいエコバッグ（グッズ用）</label
+              >
+            </li>
+            <li
+              class="flex items-center p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition"
+              onclick="toggleCheckbox(this)"
+            >
+              <div
+                class="w-5 h-5 border-2 border-gray-500 rounded flex items-center justify-center text-white transition-colors"
+              ></div>
+              <label
+                class="ml-3 text-sm font-medium text-gray-700 cursor-pointer select-none"
+                data-i18n="check5"
+                >暖かい服装（屋外活動考慮）</label
+              >
+            </li>
+          </ul>
+          <div class="mt-4 pt-4 border-t border-gray-200">
+            <p class="text-xs font-bold text-gray-500 mb-2">
+              <i class="fas fa-external-link-alt mr-1"></i>
+              <span data-i18n="linksTitle">公式リンク</span>
+            </p>
+            <div class="space-y-2">
+              <a
+                href="https://magnetbyshibuya109.jp/ko/shopnews/10441/"
+                target="_blank"
+                class="block text-xs text-orange-600 hover:underline"
+                ><i class="fas fa-store mr-1"></i> MAGNET POP UP</a
+              >
+              <a
+                href="https://chugai-grace-cafe.jp/collaboration/gakuen_idolmaster_shibuya/"
+                target="_blank"
+                class="block text-xs text-pink-600 hover:underline"
+                ><i class="fas fa-coffee mr-1"></i> Chugai Grace Café</a
+              >
+              <a
+                href="https://prtimes.jp/main/html/rd/p/000001060.000020364.html"
+                target="_blank"
+                class="block text-xs text-blue-600 hover:underline"
+                ><i class="fas fa-fish mr-1"></i> 初星水族館 II</a
+              >
+              <a
+                href="https://x.com/JOLCollabStore/status/1993968458930020422?s=20"
+                target="_blank"
+                class="block text-xs text-green-600 hover:underline"
+                ><i class="fas fa-briefcase mr-1"></i> お仕事体験フェア</a
+              >
+            </div>
+          </div>
+          <button
+            onclick="toggleChecklist()"
+            class="mt-6 w-full bg-gray-900 text-white py-3 rounded-xl font-bold text-sm hover:bg-gray-800 transition"
+            data-i18n="confirmBtn"
+          >
+            確認完了
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const i18n = {
+        ja: {
+          dayFri: "金",
+          headerTitle: "学園アイドルマスター<br />プロデューサーお仕事トラベル",
+          headerSub: "渋谷 POP UP → 池袋水族館",
+          tabTimeline: "タイムライン",
+          spot1Title: "渋谷駅で会う！！！",
+          spot1Desc: "ハチ公像前で集合",
+          spot1Tag1: "JR渋谷駅",
+          spot1Tag2: "ハチ公口",
+          walk1: "徒歩1分（TSUTAYA方面）",
+          spot2Desc: "Wild TUNE ポップアップ",
+          spot2Loc: "東京：SHIBUYA TSUTAYA IP書店",
+          spot2Tag1: "スカジャン",
+          spot2Tag2: "ストリート",
+          spot2Tag3: "限定グッズ",
+          walk2: "徒歩3分（スクランブル交差点）",
+          spot3Desc: "お仕事体験フェア POP UP",
+          spot3Tag1: "フォトスポット",
+          spot3Tag2: "12人職業テーマ",
+          spot3Tag3: "限定グッズ",
+          walk3: "徒歩5分（MODI方面）",
+          reserveReq: "要予約",
+          spot4Desc: "コラボカフェ初日訪問",
+          cafeTime: "80分制、5回転",
+          cafeFee: "入場料500円（飲食代として利用可）",
+          cafeRes: "抽選予約：12/6(土)~12/12(金)",
+          cafeFirst: "先着順：12/16(火) 17:00~",
+          spot4Tag1: "コラボメニュー",
+          spot4Tag2: "限定グッズ",
+          spot4Tag3: "ノベルティ特典",
+          transit: "渋谷駅 → 池袋駅（約20分）",
+          spot5Title: "サンシャインシティ到着",
+          spot5Desc: "ウィンドウショッピング＆休憩",
+          spot6Title: "初星水族館 II",
+          spot6Desc: "サンシャイン水族館（屋上）",
+          aquaTime: "特設会場 10:00~18:00（入場17:30まで）",
+          aquaFee: "特設会場無料 / 本館別途入場料",
+          aquaInfo1: "クリオネ衣装13人等身大パネル＆3Dホログラム",
+          aquaInfo2: "デジタルスタンプラリー（12箇所→ミニキャラカード）",
+          aquaTicket: "特典チケット（アソビュー!）：大人3,600~4,000円",
+          aquaClosed: "※ 1/15(木)休館",
+          spot7Title: "夕食",
+          spot7Desc: "サンシャインシティ レストラン街",
+          food1: "和食",
+          food2: "洋食",
+          food3: "カフェ",
+          mealTime: "ゆっくり食事（~1時間）",
+          spot8Title: "終了＆帰宅",
+          spot8Desc: "お疲れ様でした！",
+          wrapup1: "グッズ整理＆破損確認",
+          wrapup2: "池袋駅から帰宅",
+          checklistTitle: "チェックリスト",
+          check1: "コラボカフェ抽選予約 (12/6~12)",
+          check2: "水族館特典チケット（アソビュー!）",
+          check3: "MAGNET整理券（混雑時）",
+          check4: "大きいエコバッグ（グッズ用）",
+          check5: "暖かい服装（屋外活動考慮）",
+          linksTitle: "公式リンク",
+          confirmBtn: "確認完了",
+        },
+        ko: {
+          dayFri: "금",
+          headerTitle: "학원 아이돌 마스터<br />프로듀서 업무 코스",
+          headerSub: "시부야 POP UP → 이케부쿠로 수족관",
+          tabTimeline: "타임라인",
+          spot1Title: "시부야역 만남",
+          spot1Desc: "하치코 동상 앞에서 만나기",
+          spot1Tag1: "JR 시부야역",
+          spot1Tag2: "하치코 출구",
+          walk1: "도보 1분 (TSUTAYA 방향)",
+          spot2Desc: "Wild TUNE 팝업",
+          spot2Loc: "도쿄: SHIBUYA TSUTAYA IP書店",
+          spot2Tag1: "스카잔 구경",
+          spot2Tag2: "스트릿 패션",
+          spot2Tag3: "한정 굿즈",
+          walk2: "도보 3분 (스크램블 교차로)",
+          spot3Desc: "일 체험 페어 POP UP",
+          spot3Tag1: "포토 스팟",
+          spot3Tag2: "12인 직업 테마",
+          spot3Tag3: "한정 굿즈",
+          walk3: "도보 5분 (MODI 방향)",
+          reserveReq: "예약필수",
+          spot4Desc: "콜라보 카페 첫날 방문",
+          cafeTime: "80분제, 5회전",
+          cafeFee: "입장료 500엔 (음식 주문에 사용 가능)",
+          cafeRes: "추첨 예약: 12/6(토)~12/12(금)",
+          cafeFirst: "선착순: 12/16(화) 17:00~",
+          spot4Tag1: "콜라보 메뉴",
+          spot4Tag2: "한정 굿즈",
+          spot4Tag3: "노벨티 특전",
+          transit: "시부야역 → 이케부쿠로역 (약 20분)",
+          spot5Title: "선샤인 시티 도착",
+          spot5Desc: "윈도우 쇼핑 & 소화시키기",
+          spot6Title: "하츠보시 수족관 II",
+          spot6Desc: "선샤인 수족관 (옥상)",
+          aquaTime: "특설회장 10:00~18:00 (입장 17:30까지)",
+          aquaFee: "특설회장 무료 / 본관 별도 입장료",
+          aquaInfo1: "크리오네 의상 13인 등신대 패널 & 3D 홀로그램",
+          aquaInfo2: "디지털 스탬프 랠리 (12곳 → 미니캐릭터 카드)",
+          aquaTicket: "특전 티켓 (아소비유): 대인 3,600~4,000엔",
+          aquaClosed: "※ 1/15(목) 휴관",
+          spot7Title: "저녁 식사",
+          spot7Desc: "선샤인 시티 레스토랑가",
+          food1: "일식",
+          food2: "양식",
+          food3: "카페",
+          mealTime: "여유롭게 식사 (~1시간)",
+          spot8Title: "마무리 & 귀가",
+          spot8Desc: "오늘 하루 수고하셨습니다!",
+          wrapup1: "굿즈 정리 & 파손 확인",
+          wrapup2: "이케부쿠로역에서 귀가",
+          checklistTitle: "체크리스트",
+          check1: "콜라보 카페 추첨예약 (12/6~12)",
+          check2: "수족관 특전 티켓 (아소비유)",
+          check3: "MAGNET 사전예약 정리권 (혼잡시)",
+          check4: "큰 에코백 챙기기 (굿즈용)",
+          check5: "따뜻한 옷차림 (야외 활동 고려)",
+          linksTitle: "공식 링크",
+          confirmBtn: "확인 완료",
+        },
+      };
+
+      let currentLang = "ja";
+
+      function detectLanguage() {
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang.startsWith("ko")) {
+          return "ko";
+        }
+        return "ja";
+      }
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        document.getElementById("lang-label").textContent =
+          lang === "ja" ? "KO" : "JA";
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (i18n[lang][key]) {
+            el.innerHTML = i18n[lang][key];
+          }
+        });
+
+        localStorage.setItem("gakumas-lang", lang);
+      }
+
+      function toggleLang() {
+        const newLang = currentLang === "ja" ? "ko" : "ja";
+        setLanguage(newLang);
+      }
+
+      function toggleChecklist() {
+        document.getElementById("checklist-modal").classList.toggle("hidden");
+      }
+
+      function toggleCheckbox(element) {
+        const checkbox = element.querySelector("div");
+        const isChecked = checkbox.classList.contains("bg-current");
+        const colorClass = Array.from(checkbox.classList).find((c) =>
+          c.startsWith("border-")
+        );
+        const bgClass = colorClass.replace("border-", "bg-");
+
+        if (isChecked) {
+          checkbox.classList.remove(bgClass, "bg-current");
+          checkbox.innerHTML = "";
+        } else {
+          checkbox.classList.add(bgClass, "bg-current");
+          checkbox.innerHTML = '<i class="fas fa-check text-xs"></i>';
+        }
+      }
+      // 아이카씨 사랑해요...
+      // Initialize
+      const savedLang = localStorage.getItem("gakumas-lang");
+      if (savedLang) {
+        setLanguage(savedLang);
+      } else {
+        setLanguage(detectLanguage());
+      }
+    </script>
+  </body>
+</html>
